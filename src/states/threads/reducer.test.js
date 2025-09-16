@@ -13,7 +13,7 @@ import threadsReducer from "./reducer";
 describe("threadReducers function", () => {
 	it("should return the initial state when given by unknown action", () => {
 		//! for testing purpose
-		q9871;
+		// q9871;
 
 		// arrange
 		const initialState = [];
