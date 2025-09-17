@@ -7,6 +7,7 @@ import pluginCypress from "eslint-plugin-cypress/flat";
 
 export default defineConfig([
 	globalIgnores(["dist"]),
+	pluginCypress.configs.recommended,
 	{
 		files: ["**/*.{js,jsx}"],
 		extends: [
@@ -27,5 +28,4 @@ export default defineConfig([
 			"no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
 		},
 	},
-	pluginCypress(),
 ]);
