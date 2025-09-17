@@ -3,7 +3,17 @@ import api from "../../utils/api";
 const ActionType = {
 	RECEIVE_THREADS: "RECEIVE_THREADS",
 	ADD_THREADS: "ADD_THREADS",
+	SET_LOADING: "SET_LOADING",
 };
+
+function setLoading(isLoading) {
+	return {
+		type: ActionType.SET_LOADING,
+		payload: {
+			isLoading,
+		},
+	};
+}
 
 function receiveThreadsActionCreator(threads) {
 	return {
@@ -41,6 +51,7 @@ function asyncAddThread({ title, body, category }) {
 function asyncReceiveThreads() {
 	return async (dispatch) => {
 		try {
+			dispatch(setLoading(true));
 			const threads = await api.getAllThreads();
 			dispatch(receiveThreadsActionCreator(threads));
 		} catch (error) {
@@ -49,6 +60,8 @@ function asyncReceiveThreads() {
 			} else {
 				alert("An unexpected error occurred.");
 			}
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }
@@ -58,4 +71,5 @@ export {
 	receiveThreadsActionCreator,
 	asyncReceiveThreads,
 	asyncAddThread,
+	setLoading,
 };
