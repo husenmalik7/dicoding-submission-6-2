@@ -27,7 +27,11 @@ describe("threadReducers function", () => {
 
 	it("should return the threads when given by RECEIVE_THREADS action", () => {
 		// arrange
-		const initialState = [];
+		const initialState = {
+			data: [],
+			isLoading: true,
+		};
+
 		const action = {
 			type: "RECEIVE_THREADS",
 			payload: {
@@ -62,6 +66,9 @@ describe("threadReducers function", () => {
 		const nextState = threadsReducer(initialState, action);
 
 		// assert
-		expect(nextState).toEqual(action.payload.threads);
+		expect(nextState).toEqual({
+			...initialState,
+			data: action.payload.threads,
+		});
 	});
 });
